@@ -24,38 +24,6 @@ class DataService {
           availableQuantity: 25,
           category: 'Microcontroller',
           description: 'Arduino Uno R3 development board'
-        },
-        {
-          id: 'comp-2',
-          name: 'L298N Motor Driver',
-          totalQuantity: 15,
-          availableQuantity: 15,
-          category: 'Motor Driver',
-          description: 'Dual H-Bridge Motor Driver'
-        },
-        {
-          id: 'comp-3',
-          name: 'Ultrasonic Sensor HC-SR04',
-          totalQuantity: 20,
-          availableQuantity: 20,
-          category: 'Sensor',
-          description: 'Ultrasonic distance sensor'
-        },
-        {
-          id: 'comp-4',
-          name: 'Servo Motor SG90',
-          totalQuantity: 30,
-          availableQuantity: 30,
-          category: 'Actuator',
-          description: '9g micro servo motor'
-        },
-        {
-          id: 'comp-5',
-          name: 'ESP32 Development Board',
-          totalQuantity: 12,
-          availableQuantity: 12,
-          category: 'Microcontroller',
-          description: 'WiFi and Bluetooth enabled microcontroller'
         }
       ],
       requests: [],
