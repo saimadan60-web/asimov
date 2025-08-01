@@ -9,7 +9,7 @@ const BorrowForm: React.FC = () => {
   const { user } = useAuth();
   const [components, setComponents] = useState<Component[]>([]);
   const [formData, setFormData] = useState({
-    rollNo: '',
+    rollNo: user?.rollNo || '',
     mobile: '',
     componentId: '',
     quantity: 1,
@@ -20,7 +20,15 @@ const BorrowForm: React.FC = () => {
 
   useEffect(() => {
     setComponents(dataService.getComponents());
-  }, []);
+    // Pre-fill user data if available
+    if (user) {
+      setFormData(prev => ({
+        ...prev,
+        rollNo: user.rollNo || '',
+        mobile: user.mobile || ''
+      }));
+    }
+  }, [user]);
 
   useEffect(() => {
     if (notification) {

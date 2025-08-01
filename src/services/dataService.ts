@@ -1,7 +1,12 @@
 import { SystemData, User, Component, BorrowRequest, Notification, LoginSession, SystemStats } from '../types';
 
+interface UserPasswords {
+  [email: string]: string;
+}
+
 class DataService {
   private storageKey = 'isaacLabData';
+  private passwordKey = 'isaacLabPasswords';
 
   private getDefaultData(): SystemData {
     return {
@@ -57,6 +62,32 @@ class DataService {
     }
   }
 
+  // Password management (in production, passwords would be hashed)
+  setUserPassword(email: string, password: string): void {
+    try {
+      const passwords = this.getUserPasswords();
+      passwords[email] = password;
+      localStorage.setItem(this.passwordKey, JSON.stringify(passwords));
+    } catch (error) {
+      console.error('Error saving password:', error);
+    }
+  }
+
+  private getUserPasswords(): UserPasswords {
+    try {
+      const passwords = localStorage.getItem(this.passwordKey);
+      return passwords ? JSON.parse(passwords) : {};
+    } catch (error) {
+      console.error('Error loading passwords:', error);
+      return {};
+    }
+  }
+
+  private verifyPassword(email: string, password: string): boolean {
+    const passwords = this.getUserPasswords();
+    return passwords[email] === password;
+  }
+
   // User operations
   addUser(user: User): void {
     const data = this.getData();
@@ -81,27 +112,35 @@ class DataService {
   }
 
   authenticateUser(email: string, password: string): User | null {
-    const expectedPassword = email === 'admin@issacasimov.in' ? 'ralab' : 'issacasimov';
-    
-    if (password !== expectedPassword) {
-      return null;
-    }
-
     let user = this.getUser(email);
     
-    if (!user && email.endsWith('@issacasimov.in') && email !== 'admin@issacasimov.in') {
-      // Create new student user
-      const name = email.split('@')[0].replace(/\./g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-      user = {
-        id: `user-${Date.now()}`,
-        name,
-        email,
-        role: 'student',
-        registeredAt: new Date().toISOString(),
-        loginCount: 0,
-        isActive: true
-      };
-      this.addUser(user);
+    // Handle admin login with default password
+    if (email === 'admin@issacasimov.in') {
+      const passwords = this.getUserPasswords();
+      const adminPassword = passwords[email] || 'ralab'; // Default admin password
+      if (password !== adminPassword) {
+        return null;
+      }
+      
+      if (!user) {
+        // Create admin user if doesn't exist
+        user = {
+          id: 'admin-1',
+          name: 'Administrator',
+          email: 'admin@issacasimov.in',
+          role: 'admin',
+          registeredAt: new Date().toISOString(),
+          loginCount: 0,
+          isActive: true
+        };
+        this.addUser(user);
+        this.setUserPassword(email, 'ralab'); // Set default admin password
+      }
+    } else {
+      // For regular users, verify password
+      if (!user || !this.verifyPassword(email, password)) {
+        return null;
+      }
     }
 
     if (user) {
