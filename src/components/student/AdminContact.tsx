@@ -46,7 +46,7 @@ const AdminContact: React.FC = () => {
             <div>
               <p className="text-peacock-300 text-sm">Location</p>
               <p className="text-white font-medium">Isaac Asimov Robotics Laboratory</p>
-              <p className="text-peacock-300 text-sm">Ground Floor, Engineering Block</p>
+              <p className="text-peacock-300 text-sm">Ground Floor, Academic Block (D-Block)</p>
             </div>
           </div>
 
@@ -56,8 +56,8 @@ const AdminContact: React.FC = () => {
             </div>
             <div>
               <p className="text-peacock-300 text-sm">Office Hours</p>
-              <p className="text-white font-medium">Monday - Friday: 9:00 AM - 5:00 PM</p>
-              <p className="text-peacock-300 text-sm">Saturday: 9:00 AM - 1:00 PM</p>
+              <p className="text-white font-medium">Tuesday - Saturday: 8:00 AM - 3:00 PM</p>
+              <p className="text-peacock-300 text-sm">Monday: 8:00 AM - 1:00 PM</p>
             </div>
           </div>
         </div>
