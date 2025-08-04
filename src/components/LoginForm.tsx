@@ -159,7 +159,7 @@ const LoginForm: React.FC = () => {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     className="w-full pl-10 pr-4 py-4 bg-dark-700/50 border border-dark-600 rounded-xl text-white placeholder-dark-400 focus:border-peacock-500 focus:ring-2 focus:ring-peacock-500/20 transition-all duration-300 group-hover:border-dark-500"
-                    placeholder="Enter your full name"
+                    placeholder="Enter your College Roll Number"
                     required
                   />
                 </div>
@@ -203,7 +203,7 @@ const LoginForm: React.FC = () => {
                   Mobile Number
                 </label>
                 <div className="relative group">
-                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-peacock-400 w-5 h-5 group-focus-within:text-peacock-300 transition-colors" />
+                  <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-peacock-400 w-5 h-5 group-focus-within:text-peacock-300 transition-colors" />
                   <input
                     type="tel"
                     value={mobile}
