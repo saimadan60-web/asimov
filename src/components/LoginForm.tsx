@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Eye, EyeOff, User, Lock, Cpu, Shield, Users, UserPlus, Mail, Hash } from 'lucide-react';
+import { Eye, EyeOff, User, Lock, Cpu, Shield, Users, UserPlus, Mail, Hash, Phone } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 const LoginForm: React.FC = () => {
