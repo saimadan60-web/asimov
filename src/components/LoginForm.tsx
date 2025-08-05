@@ -159,7 +159,7 @@ const LoginForm: React.FC = () => {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     className="w-full pl-10 pr-4 py-4 bg-dark-700/50 border border-dark-600 rounded-xl text-white placeholder-dark-400 focus:border-peacock-500 focus:ring-2 focus:ring-peacock-500/20 transition-all duration-300 group-hover:border-dark-500"
-                    placeholder="Enter your College Roll Number"
+                    placeholder="Enter Your Full Name"
                     required
                   />
                 </div>
