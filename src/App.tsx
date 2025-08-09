@@ -1,12 +1,22 @@
 import React from 'react';
-import { AuthProvider, useAuth } from './context/AuthContext';
+import { FirebaseAuthProvider, useFirebaseAuth } from './context/FirebaseAuthContext';
 import LoginForm from './components/LoginForm';
 import Header from './components/Header';
 import StudentDashboard from './components/student/StudentDashboard';
 import AdminDashboard from './components/admin/AdminDashboard';
+import FirebaseMigration from './components/FirebaseMigration';
 
 const AppContent: React.FC = () => {
-  const { user, isLoading } = useAuth();
+  const { user, isLoading } = useFirebaseAuth();
+  const [showMigration, setShowMigration] = React.useState(false);
+
+  React.useEffect(() => {
+    // Check if there's existing local data to migrate
+    const localData = localStorage.getItem('isaacLabData');
+    if (localData && !user) {
+      setShowMigration(true);
+    }
+  }, [user]);
 
   if (isLoading) {
     return (
@@ -14,6 +24,10 @@ const AppContent: React.FC = () => {
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-peacock-500"></div>
       </div>
     );
+  }
+
+  if (showMigration) {
+    return <FirebaseMigration />;
   }
 
   if (!user) {
@@ -30,9 +44,9 @@ const AppContent: React.FC = () => {
 
 function App() {
   return (
-    <AuthProvider>
+    <FirebaseAuthProvider>
       <AppContent />
-    </AuthProvider>
+    </FirebaseAuthProvider>
   );
 }
 
